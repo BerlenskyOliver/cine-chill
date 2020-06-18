@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+//// QJ = LQ
 /*
 |--------------------------------------------------------------------------
 | Web Routes
