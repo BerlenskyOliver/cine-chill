@@ -2,35 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\ViewModels\MoviesViewModel;
-use App\ViewModels\MovieViewModel;
+use App\ViewModels\ActorsViewModel;
+use App\ViewModels\ActorViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class Moviescontroller extends Controller
+class Actorscontroller extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($page = 1)
     {
-        $popularmovies = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/movie/popular')
+        abort_if($page > 500, 204);
+        $popularactors = Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/person/popular?page='. $page)
             ->json()['results'];
 
-        $now_playingmovies = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/movie/now_playing')
-            ->json()['results'];
-
-        $genres = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/genre/movie/list')
-            ->json()['genres'];
-
-        $viewmodel = new MoviesViewModel($popularmovies, $now_playingmovies, $genres);
-
-        return view('movies.index', $viewmodel);
+        $viewmodel = new ActorsViewModel($popularactors, $page);
+        
+        return view('actors.index', $viewmodel);
     }
 
     /**
@@ -40,7 +33,7 @@ class Moviescontroller extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -61,14 +54,22 @@ class Moviescontroller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
-        $movie = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/movie/'.$id.'?append_to_response=credits,videos,images')
+    {
+        $actor = Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/person/'.$id)
             ->json();
 
-        $viewmodel = new MovieViewModel($movie);
-        
-        return view('movies.show', $viewmodel);
+        $social = Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/person/'.$id. '/external_ids')
+            ->json();
+
+        $credits = Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/person/'.$id. '/combined_credits')
+            ->json();
+
+        $viewmodel = new ActorViewModel($actor, $social, $credits);
+
+        return view('actors.show', $viewmodel);
     }
 
     /**
