@@ -33,7 +33,9 @@
                     </div>
                 </div>
                 <div x-data="{isOpen: false}">
+                    
                     @if(count($movie['videos']['results']) > 0)
+                    
                     <div class="mt-12">
                         <button 
                         @click="isOpen = true"
@@ -43,28 +45,29 @@
                             <span class="ml-2">Play Trailer</span>
                         </button>
                     </div>
-                @endif
-                <div 
-                    style="background-color: rgba(0,0,0,.5)"
-                    class="fixed top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto" x-show.transition.opacity="isOpen">
-                    <div class="container mx-auto lg:px-32 rounded-lg overflow-y-auto">
-                        <div class="bg-gray-900 rounded">
-                            <div class="flex justify-end px-4 pt-2">
-                                <button 
-                                @click="isOpen = false"
-                                class="text-3xl loading-none hover:text-gray-300">&times;</button>
-                            </div>
-                            <div class="modal-body px-8 py-5">
-                                
-                                <div class="responsive-container overflow-hidden relative" style="padding-top: 56.25%">
-                                    <iframe with="360" height="315" src="https://youtube.com/embed/{{ $movie['videos']['results'][0]['key'] }}" style="border: 0;"  class="responsive-iframe absolute top-0 left-0 w-full h-full"
-                                    allowfullscreen allow="autoplay; encrypted-media"></iframe>
+                
+                    <div 
+                        style="background-color: rgba(0,0,0,.5)"
+                        class="fixed top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto" x-show.transition.opacity="isOpen">
+                        <div class="container mx-auto lg:px-32 rounded-lg overflow-y-auto">
+                            <div class="bg-gray-900 rounded">
+                                <div class="flex justify-end px-4 pt-2">
+                                    <button 
+                                    @click="isOpen = false"
+                                    class="text-3xl loading-none hover:text-gray-300">&times;</button>
+                                </div>
+                                <div class="modal-body px-8 py-5">
+                                    
+                                    <div class="responsive-container overflow-hidden relative" style="padding-top: 56.25%">
+                                        <iframe with="360" height="315" src="https://youtube.com/embed/{{ $movie['videos']['results'][0]['key'] }}" style="border: 0;"  class="responsive-iframe absolute top-0 left-0 w-full h-full"
+                                        allowfullscreen allow="autoplay; encrypted-media"></iframe>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
                 </div>
             </div>
         </div>
