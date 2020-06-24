@@ -1,4 +1,12 @@
 module.exports = {
+  purge: [
+    './resources/views/actors/*.blade.php',
+    './resources/views/movies/*.blade.php',
+    './resources/views/tv/*.blade.php',
+    './resources/views/layouts/*.blade.php',
+    './resources/views/components/*.blade.php',
+    './resources/views/livewire/*.blade.php',
+  ],
   theme: {
     extend: {
         width: {
