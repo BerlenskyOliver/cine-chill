@@ -96,6 +96,8 @@
 
  
     <div>
+        @dump($movie['images'])
+        
         <div class="movie-images" x-data="{isOpen: false, image: '' }">
             <div class="container mx-auto px-4 py-16">
                 <h2 class="text-4xl font-semibold">Images</h2>
@@ -130,5 +132,6 @@
                     </div>
             </div>
         </div>
+   
     </div>
 @endsection

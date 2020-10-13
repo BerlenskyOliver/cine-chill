@@ -1,5 +1,9 @@
 module.exports = {
-  
+  purge: [
+    './resources/views/**/*.blade.php',
+    './resources/js/**/*.js',
+    './resources/js/**/*.jsx',
+  ],
   theme: {
     extend: {
         width: {
