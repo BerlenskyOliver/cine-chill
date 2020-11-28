@@ -1,12 +1,13 @@
-<div class="relative mt-3 md:mt-0" x-data="{ isOpen: true}" @click.away="isOpen = false">
+<div class="relative mt-3 md:mt-0" x-data="{ isOpen: false}" @click.away="isOpen = false">
     <form method="GET" action={{ route('search') }}>
-        <input wire:model.debounce.500ms="search" type="text"  
+        <input wire:model.debounce.500ms="q" type="text"  
         class="bg-gray-800 rounded-full w-full px-4 pl-8 py-1 focus:outline-none focus:shadow-outline" 
         placeholder="Search"
+        autocomplete="off"
         name="q"
-        x-ref="search"
+        x-ref="q"
         @keydown.window= "
-        if(event.keyCode === 191){event.preventDefault(); $refs.search.focus();}"
+        if(event.keyCode === 191){event.preventDefault(); $refs.q.focus();}"
         @focus="isOpen = true"
         @keydown="isOpen = true"
         @keydown.escape.window="isOpen = false"
@@ -21,7 +22,7 @@
     
     </form>
 
-    @if(strlen($search) > 2)
+    @if(strlen($q) > 2)
         <div class="z-50 absolute bg-gray-800 rounded w-full mt-4"
         x-show.transition.opacity="isOpen"
         
@@ -30,7 +31,7 @@
                 <ul>
                     @foreach ($searchResults as $result)
                         <li class="border-b border-gray-700">
-                            <a href="{{ route('movies.show', $result['id']) }}" class="hover:bg-gray-700 px-3 py-3 flex items-center transition ease-in-out
+                            <a href="{{ route('movie.show', $result['id']) }}" class="hover:bg-gray-700 px-3 py-3 flex items-center transition ease-in-out
                             duration-150"
                             @if($loop->last) @keydown.tab="isOpen = false" @endif
                             >
@@ -45,7 +46,7 @@
                     @endforeach
                 </ul>
             @else
-                <div class="px-3 py-3">No results for *{{ $search }}*</div>
+                <div class="px-3 py-3">No results for *{{ $q }}*</div>
             @endif           
         </div>
     @endif

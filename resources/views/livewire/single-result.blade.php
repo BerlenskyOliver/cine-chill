@@ -1,5 +1,5 @@
 <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-3">
-    <div>
+    <a href={{ $url }}>
       <div class="md:flex-shrink-0">
         @if ($result['type'] === 'keyword')
         @else
@@ -14,11 +14,11 @@
         <div class="uppercase tracking-wide text-sm text-gray-700 font-semibold">{{ $result['publish_date'] }}</div>
         @endif
       
-        <a href="#" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ $result['name'] }}</a>
+        <a href={{ $url }} class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ $result['name'] }}</a>
         @if ($result['type'] === 'person' || $result['type'] === 'keyword')
         @else
         <p class="mt-2 text-gray-500">{{ substr($result['overview'], 2, 55). '...' }}</p>
         @endif
       </div>
-    </div>
+    </a>
 </div>

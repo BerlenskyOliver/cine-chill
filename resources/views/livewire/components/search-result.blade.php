@@ -1,5 +1,5 @@
 <div class="search-results">
-    <div class="flex justify-between">
+    <div class="flex justify-between flex-wrap py-4">
         <h2 class="uppercase tracking-wider text-orange-500 text-lg font-semibold">Results for: {{ $query }}</h2>
         @livewire('components.select')
     </div>
