@@ -26,7 +26,7 @@ Route::group([
     Route::get("/search", 'SearchController@show')->name('search');
     Route::get('/movies/{id}', 'Moviescontroller@show')->name('movie.show'); 
 
-    Route::get('/actors', 'ActorsController@index')->name('actors.index');
+    Route::get('/actors', 'Actorscontroller@index')->name('actors.index');
     Route::get('/actors/page/{page?}', 'Actorscontroller@index');
     Route::get('/actors/{id}', 'Actorscontroller@show')->name('actors.show');
     Route::get('/tv', 'TvController@index')->name('tv.index');
