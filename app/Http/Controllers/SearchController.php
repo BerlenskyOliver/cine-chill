@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Searchcontroller extends Controller
+class SearhController extends Controller
 {
     
     public function show(Request $request)

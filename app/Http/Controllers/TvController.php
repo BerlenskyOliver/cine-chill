@@ -8,7 +8,7 @@ use App\ViewModels\TvViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
-class Tvcontroller extends Controller
+class TvController extends Controller
 {
     /**
      * Display a listing of the resource.

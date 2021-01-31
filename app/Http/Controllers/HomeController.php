@@ -6,7 +6,7 @@ use App\Http\HttpCall;
 use App\ViewModels\HomeViewModel;
 use Illuminate\Support\Facades\Cache;
 
-class Homecontroller extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
