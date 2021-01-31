@@ -4,11 +4,10 @@ namespace App\Http\Livewire\Components;
 
 use Livewire\Component;
 
-class Nav extends Component
+class MovieCard extends Component
 {
-
     public function render()
     {
-        return view('livewire.components.nav');
+        return view('livewire.components.movie-card');
     }
 }

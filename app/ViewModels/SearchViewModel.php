@@ -27,8 +27,8 @@ class SearchViewModel extends ViewModel
 
     private function formatSearch($results)
     {
-        return collect($results)->map(function($result){
-            
+        return collect($results)->map(function($result)
+        {
             if($this->type === 'movie'){
                 if($result['poster_path'] === null ) return;
 

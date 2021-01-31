@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\HttpCall;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
@@ -10,7 +11,6 @@ use Livewire\Component;
 class SearchDropdown extends Component
 {
     public $q = ''; 
-    public $dropOpen = false;
 
     protected $queryString = [
         'q' => ['except' => '']
@@ -21,14 +21,15 @@ class SearchDropdown extends Component
         $searchResults = [];
 
         if(strlen($this->q) >= 2){
-            $searchResults = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/search/movie?query='.$this->q)
-            ->json()['results'];
+            $searchResults = HttpCall::Tmdbget('/search/movie', "?query=$this->q")['results'];
+            // Http::withToken(config('services.tmdb.token'))
+            // ->get('https://api.themoviedb.org/3/search/movie?query='.$this->q)
+            // ->json();
+
         }
 
         return view('livewire.search-dropdown', [
             'searchResults' => collect($searchResults)->take(10),
             ]);
-            //$searchResults
     }
 }

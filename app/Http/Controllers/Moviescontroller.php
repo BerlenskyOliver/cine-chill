@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\HttpCall;
 use App\ViewModels\MoviesViewModel;
 use App\ViewModels\MovieViewModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class Moviescontroller extends Controller
@@ -14,27 +16,29 @@ class Moviescontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         
-        $popularmovies = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/movie/popular?language=fr-FR')
-            ->json()['results'];
-
-        $now_playingmovies = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/movie/now_playing?language=fr-FR')
-            ->json()['results'];
-
-        $genres = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/genre/movie/list?language=fr-FR')
-            ->json()['genres'];
-    
-        $viewmodel = new MoviesViewModel($popularmovies, $now_playingmovies, $genres);
+        $genres = Cache::remember('movies.genres', now()->addHours(5), function () {
+            return HttpCall::Tmdbget('/genre/movie/list')['genres'];
+        });
+        if($request->get('category')){
+            $movies_with_genre = [];
+            foreach($genres as $genre){
+                if(in_array($request->get('category'), $genre)){
+                    $movies_with_genre = HttpCall::Tmdbget('/discover/movie', "?with_genres={$genre['id']}")['results'];
+                }
+            }
+            $viewmodel = new MoviesViewModel(null, null, $genres, $movies_with_genre);
+            return view('movies.index', $viewmodel);
+        }else{
+            $popularmovies = HttpCall::Tmdbget('/movie/popular')['results'];
+            $now_playingmovies = HttpCall::Tmdbget('/movie/now_playing')['results'];
+            $viewmodel = new MoviesViewModel($popularmovies, $now_playingmovies, $genres, null);
+            return view('movies.index', $viewmodel);
+        }
         
-        return view('movies.index', $viewmodel);
     }
-
-   
 
     /**
      * Display the specified resource.
@@ -44,12 +48,17 @@ class Moviescontroller extends Controller
      */
     public function show($id)
     {   
-        $movie = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/movie/'.$id.'?append_to_response=credits,videos,images&language=fr-FR')
-            ->json();
-        
-        $viewmodel = new MovieViewModel($movie);
-        
+        $movie = Cache::remember("singele.movie.{$id}", now()->addHours(3), function () use($id) {
+            return HttpCall::Tmdbget("/movie/{$id}", "?append_to_response=credits,videos,images");
+        });
+
+        $movieSimilar = HttpCall::Tmdbget("/movie/{$id}/similar");
+        if(!is_null($movieSimilar)){
+            $movieSimilar = $movieSimilar['results'];
+        }else{
+            $movieSimilar = [];
+        }      
+        $viewmodel = new MovieViewModel($movie, $movieSimilar);   
         return view('movies.show', $viewmodel);
     }
 

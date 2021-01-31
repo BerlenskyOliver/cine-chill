@@ -1,8 +1,34 @@
-@import "./themify-icons.css";
 @import "./tailwind.css";
 @import "./nav.css";
 @import "./banner.css";
 
 .spinner {
     position: absolute;
+}
+
+.ellipsis{
+    @apply block overflow-hidden overflow-ellipsis w-auto whitespace-nowrap;
+}
+.tag{
+    list-style: none;
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 50px;
+    display: inline-block;
+    @apply bg-gray-600;
+    @apply bg-opacity-25;
+}
+.mini_tag{
+    padding: 1px 10px;
+    font-size: 10px;
+}
+.big_tag{
+    font-size: 13px;
+    padding: 4px 10px;
+    margin: 4px;
+}
+
+.navbar-active{
+    color: #000 !important;
+    background-color: #ffffff !important;
 }

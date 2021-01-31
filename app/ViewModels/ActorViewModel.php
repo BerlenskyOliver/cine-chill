@@ -38,8 +38,6 @@ class ActorViewModel extends ViewModel
         ]);
     }
 
-   
-
     public function knownForMovies()
     {
         $castMovies = collect($this->credits)->get('cast');
@@ -59,7 +57,7 @@ class ActorViewModel extends ViewModel
                     ? 'https://image.tmdb.org/t/p/w300/'. $movie['poster_path']
                     : 'https://via.placeholder.com/185x278',
                     'title' => $title,
-                    'linkToPage' => $movie['media_type'] === 'movie' ? route('movies.show', $movie['id']) : route('tv.show', $movie['id']), 
+                    'linkToPage' => $movie['media_type'] === 'movie' ? route('movie.show', $movie['id']) : route('tv.show', $movie['id']), 
                 ]);
             });
     }
