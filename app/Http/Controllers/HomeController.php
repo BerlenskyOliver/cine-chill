@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\HttpCall;
 use App\ViewModels\HomeViewModel;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-class HomeController extends Controller
+class Homecontroller extends Controller
 {
     /**
      * Display a listing of the resource.

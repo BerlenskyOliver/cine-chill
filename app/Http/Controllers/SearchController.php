@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-class SearchController extends Controller
+
+class Searchcontroller extends Controller
 {
     
     public function show(Request $request)
