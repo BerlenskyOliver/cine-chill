@@ -49,7 +49,9 @@
                         style="background-color: rgba(0,0,0,.5)"
                         class="fixed top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto z-10" x-show.transition.opacity="isOpen">
                         <div class="container mx-auto lg:px-32 rounded-lg overflow-y-auto">
-                            <div class="bg-gray-900 rounded">
+                            <div 
+                            @click.away="isOpen = false"
+                            class="bg-gray-900 rounded">
                                 <div class="flex justify-end px-4 pt-2">
                                     <button 
                                     @click="isOpen = false"
@@ -114,9 +116,11 @@
                     </div>
                     <div 
                             style="background-color: rgba(0,0,0,.5)"
-                            class="fixed top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto" x-show.transition.opacity="isOpen">
+                            class="fixed top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto z-50" x-show.transition.opacity="isOpen">
                             <div class="container mx-auto lg:px-32 rounded-lg overflow-y-auto">
-                                <div class="bg-gray-900 rounded">
+                                <div 
+                                 @click.away="isOpen = false"
+                                class="bg-gray-900 rounded">
                                     <div class="flex justify-end px-4 pt-2">
                                         <button 
                                         @click="isOpen = false"
@@ -124,7 +128,7 @@
                                         class="text-3xl loading-none hover:text-gray-300">&times;</button>
                                     </div>
                                     <div class="modal-body px-8 py-5">
-                                        <img :src="image" alt="">
+                                        <img :src="image" alt="" class="h-80 w-full object-cover">
                                     </div>
                                 </div>
                         </div>

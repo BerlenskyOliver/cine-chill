@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="modal-body px-3 py-4">
                                         
-                                        <div class="responsive-container overflow-hidden relative" style="padding-top: 45%">
+                                        <div class="responsive-container overflow-hidden relative" style="padding-top: 56.25%">
                                             <iframe with="360" height="315" src="https://youtube.com/embed/{{ $movie['videos']['results'][0]['key'] }}" style="border: 0;"  class="responsive-iframe absolute top-0 left-0 w-full h-full rounded-lg"
                                             allowfullscreen allow="autoplay; encrypted-media"></iframe>
 
