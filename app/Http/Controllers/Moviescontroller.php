@@ -15,7 +15,7 @@ class Moviescontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request,$page = 1)
     {
         
         $genres = Cache::remember('movies.genres', now()->addHours(5), function () {
@@ -31,7 +31,8 @@ class Moviescontroller extends Controller
             $viewmodel = new MoviesViewModel(null, null, $genres, $movies_with_genre);
             return view('movies.index', $viewmodel);
         }else{
-            $popularmovies = HttpCall::Tmdbget('/movie/popular')['results'];
+            abort_if($page > 500, 204);
+            $popularmovies = HttpCall::Tmdbget('/movie/popular', "?page=$page")['results'];
             $now_playingmovies = HttpCall::Tmdbget('/movie/now_playing')['results'];
             $viewmodel = new MoviesViewModel($popularmovies, $now_playingmovies, $genres, null);
             return view('movies.index', $viewmodel);

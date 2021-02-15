@@ -2,10 +2,6 @@
 @import "./nav.css";
 @import "./banner.css";
 
-.spinner {
-    position: absolute;
-}
-
 .ellipsis{
     @apply block overflow-hidden overflow-ellipsis w-auto whitespace-nowrap;
 }

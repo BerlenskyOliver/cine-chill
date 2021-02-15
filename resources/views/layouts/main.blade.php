@@ -9,7 +9,7 @@
     <link rel="preload" href="/js/app.js" as="script">
     <link rel="stylesheet" href="/css/main.css">
     @livewireStyles
-    <script src="/js/app.js"></script>
+    
 </head>
 
 <body class="font-sans  text-white" style="background: #111">
@@ -19,7 +19,7 @@
         @yield('content')
     </div>
     @livewireScripts
-    
+    <script src="/js/app.js"></script>
     @yield('scripts')
 </body>
 </html>

@@ -23,6 +23,7 @@ Route::group([
 
     Route::get('/', "HomeController@index")->name('home');
     Route::get('/movies', "Moviescontroller@index")->name('movies.index');
+    Route::get('/movies/page/{page?}', "Moviescontroller@index");
     Route::get("/search", 'SearchController@show')->name('search');
     Route::get('/movies/{id}', 'Moviescontroller@show')->name('movie.show'); 
 
@@ -30,5 +31,6 @@ Route::group([
     Route::get('/actors/page/{page?}', 'Actorscontroller@index');
     Route::get('/actors/{id}', 'Actorscontroller@show')->name('actors.show');
     Route::get('/tv', 'TvController@index')->name('tv.index');
+    Route::get('/tv/page/{page?}', 'TvController@index');
     Route::get('/tv/{id}', 'TvController@show')->name('tv.show');
 });

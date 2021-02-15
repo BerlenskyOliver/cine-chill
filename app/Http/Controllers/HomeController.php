@@ -27,6 +27,9 @@ class HomeController extends Controller
         });
         $netflixoriginal = HttpCall::Tmdbget('/discover/tv', '?with_network=213')['results'][rand(0, 19)];
         $popularmovies = HttpCall::Tmdbget('/movie/popular')['results'];
+        $upcomingmovies = HttpCall::Tmdbget('/movie/upcoming')['results'];
+        
+        $ontheairseries = HttpCall::Tmdbget('/tv/on_the_air')['results'];
         $popularseries = HttpCall::Tmdbget('/tv/popular')['results'];
 
         $viewmodel = new HomeViewModel(
@@ -34,7 +37,9 @@ class HomeController extends Controller
                                 $popularseries, 
                                 $moviegenres, 
                                 $tvgenres, 
-                                $netflixoriginal
+                                $netflixoriginal,
+                                $upcomingmovies,
+                                $ontheairseries
                             );
     
         return view('home', $viewmodel);

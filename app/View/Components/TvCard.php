@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 class TvCard extends Component
 {
     public $tvshow;
+
     /**
      * Create a new component instance.
      *

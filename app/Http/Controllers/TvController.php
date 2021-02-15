@@ -15,11 +15,12 @@ class TvController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $page = 1)
     {
         $genres = Cache::remember('tv.genres', now()->addHours(5), function () {
             return HttpCall::Tmdbget('/genre/tv/list')['genres'];
         });
+        
         if($request->get('category')){
             $tv_with_genre = [];
             foreach($genres as $genre){
@@ -30,9 +31,10 @@ class TvController extends Controller
             $viewmodel = new TvViewModel(null, null, $genres, $tv_with_genre);
             return view('movies.index', $viewmodel);
         }else{
-            $populartv = HttpCall::Tmdbget('/tv/popular')['results'];
+            abort_if($page > 500, 204);
+            $populartv = HttpCall::Tmdbget('/tv/popular', "?page=$page")['results'];
             $topratedtv = HttpCall::Tmdbget('/tv/top_rated')['results'];
-            $viewmodel = new TvViewModel($populartv,$topratedtv, $genres, null);
+            $viewmodel = new TvViewModel($populartv, $topratedtv, $genres, null);
             return view('tv.index', $viewmodel);
         }
     }

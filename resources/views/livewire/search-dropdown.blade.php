@@ -17,9 +17,9 @@
         <div class="absolute top-0">
             <svg class="fill-current w-4 text-gray-500 mt-2 ml-2" viewBox="0 0 24 24"><path class="heroicon-ui" d="M16.32 14.9l5.39 5.4a1 1 0 01-1.42 1.4l-5.38-5.38a8 8 0 111.41-1.41zM10 16a6 6 0 100-12 6 6 0 000 12z"/></svg>
         </div>
-
-        <div wire:loading class="spinner top-0 right-0 mr-4 mt-4"></div>
-    
+        <div wire:loading class="absolute top-0 right-0 mr-2 my-1">
+            <svg width="24" height="24" class="text-gray-400 w-5" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" color="#000"><g transform="translate(1 1)" stroke-width="2" fill="none" fill-rule="evenodd"><circle stroke-opacity=".5" cx="18" cy="18" r="18"></circle><path d="M36 18c0-9.94-8.06-18-18-18"><animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"></animateTransform></path></g></svg>
+        </div>
     </form>
 
     @if(strlen($q) > 2)

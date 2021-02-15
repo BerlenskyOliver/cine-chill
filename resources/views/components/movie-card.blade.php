@@ -1,4 +1,5 @@
-<div class="mt-4">
+<div {{ $attributes->merge(['class' => 'mt-4']) }}>
+   
     <a href="{{ route('movie.show', $movie['id']) }}">
         <img src="{{ $movie['poster_path'] }}" alt="" class="hover:opacity-750 transition ease-in-out duration-150 rounded-lg">
     </a>

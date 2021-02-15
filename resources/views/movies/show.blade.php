@@ -76,7 +76,7 @@
     <div class="movie-cast {{ $movie['images']->count() > 0 ?? "border-b border-gray-800" }}">
         <div class="container mx-auto px-4 py-16">
             <div class="text-4xl font-semibold"> Cast</div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 @foreach ($movie['cast'] as $cast)
                     <div class="mt-8">
                         <a href="{{ route('actors.show', $cast['id']) }}">
@@ -146,3 +146,4 @@
     @endif
 
 @endsection
+
